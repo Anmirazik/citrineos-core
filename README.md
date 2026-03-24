@@ -285,9 +285,14 @@ docker-compose up -d
 Once Docker is running, the following services should be available:
 
 - **CitrineOS** (service name: citrineos) with ports
-  - `8080`: webserver http - [Swagger](http://localhost:8080/docs)
-  - `8081`: websocket server tcp connection without auth
-  - `8082`: websocket server tcp connection with basic http auth
+  - `8085` (host) → `8080` (container): REST API webserver — **[Swagger API Docs](http://localhost:8085/docs)**
+  - `8086` (host) → `8081` (container): WebSocket — OCPP 2.0.1, no auth (`ws://localhost:8086`)
+  - `8082`: WebSocket — OCPP 2.0.1, basic HTTP auth
+  - `8443`: WebSocket — OCPP 2.0.1, TLS (security profile 2)
+  - `8444`: WebSocket — OCPP 2.0.1, mTLS (security profile 3)
+  - `8092`: WebSocket — OCPP 1.6
+
+> **API Web Interface:** Open [http://localhost:8085/docs](http://localhost:8085/docs) in your browser after starting Docker to access the full Swagger/OpenAPI interface for sending commands to charging stations.
 - **RabbitMQ Broker** (service name: amqp-broker) with ports
   - `5672`: amqp tcp connection
   - `15672`: RabbitMQ [management interface](http://localhost:15672)
